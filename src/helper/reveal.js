@@ -1,5 +1,5 @@
 const {TezosConstants, TezosNodeReader} = require('conseiljs')
-const signTransaction = require('./signTransaction')
+const signTransaction = require('./utils/signTransaction')
 
 async function revealOperation(server, signer, keyStore, fee = TezosConstants.DefaultKeyRevealFee, offset = TezosConstants.HeadBranchOffset) {
     const counter = await TezosNodeReader.getCounterForAccount(server, keyStore.publicKeyHash) + 1;

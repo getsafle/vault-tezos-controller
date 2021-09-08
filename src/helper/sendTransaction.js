@@ -1,4 +1,4 @@
-const performPostRequest = require('./postRequest')
+const performPostRequest = require('./utils/postRequest')
 
 async function injectOperation(server, signedOpGroup, chainid = 'main') {
     const response = await performPostRequest(server, `injection/operation?chain=${chainid}`, signedOpGroup.bytes.toString('hex'));
