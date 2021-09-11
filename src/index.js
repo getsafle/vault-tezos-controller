@@ -3,7 +3,12 @@ const { registerFetch, registerLogger, TezosMessageUtils } = require('conseiljs'
 const fetch = require('node-fetch');
 const log = require('loglevel');
 
-const { tezos: { HD_PATH }, tezos_transaction: { ACTIVATE_ACCOUNT, REVEAL_ACCOUNT, DELEGATE, NATIVE_TRANSFER, DEPLOY_CONTRACT_TRANSACTION, CONTRACT_TRANSACTION }, tezos_ket_hint: { EDSK } } = require('./config')
+const {
+  tezos: { HD_PATH },
+  tezos_transaction: { ACTIVATE_ACCOUNT, REVEAL_ACCOUNT, DELEGATE, NATIVE_TRANSFER, DEPLOY_CONTRACT_TRANSACTION, CONTRACT_TRANSACTION },
+  tezos_key_hint: { EDSK },
+  tezos_transaction_default_values: { DEFAULT_TRANSFER_TXN_FEE, DEFAULT_DELEGATE_TXN_FEE, DEFAULT_CONTRACT_TXN_CODE_FORMAT, DEFAULT_CONTRACT_TXN_PARAM_FORMAT, DEFAULT_TXN_OFFSET, DEFAULT_TXN_OPTIMIZATION }
+} = require('./config')
 const helper = require('./helper')
 
 const logger = log.getLogger('conseiljs');
@@ -58,33 +63,58 @@ class XTZHdKeyring {
 
       return { signedTransaction: activateTxn }
     }
-    if (txnType === NATIVE_TRANSFER) {
-      const { to, amount } = transaction.data
-      const transferTezTxn = await helper.transferTez(connectionUrl, signer, keyStore, to, amount)
-
-      return { signedTransaction: transferTezTxn }
-    }
     if (txnType === REVEAL_ACCOUNT) {
       const revealTxn = await helper.revealAccount(connectionUrl, signer, keyStore)
 
       return { signedTransaction: revealTxn }
     }
+    if (txnType === NATIVE_TRANSFER) {
+      const { to, amount, fee, offset, optimizeFee } = transaction.data
+      const transferTezTxn = await helper.transferTez(connectionUrl, signer, keyStore, to, amount, fee !== undefined ? fee : DEFAULT_TRANSFER_TXN_FEE, offset !== undefined ? offset : DEFAULT_TXN_OFFSET, optimizeFee !== undefined ? optimizeFee : DEFAULT_TXN_OPTIMIZATION)
+
+      return { signedTransaction: transferTezTxn }
+    }
     if (txnType === DELEGATE) {
-      const { delegate } = transaction.data
-      const delegateTxn = await helper.delegate(connectionUrl, signer, keyStore, delegate)
+      const { delegate, fee, offset, optimizeFee } = transaction.data
+      const delegateTxn = await helper.delegate(connectionUrl, signer, keyStore, delegate, fee !== undefined ? fee : DEFAULT_DELEGATE_TXN_FEE, offset !== undefined ? offset : DEFAULT_TXN_OFFSET, optimizeFee !== undefined ? optimizeFee : DEFAULT_TXN_OPTIMIZATION)
 
       return { signedTransaction: delegateTxn }
     }
     if (txnType === DEPLOY_CONTRACT_TRANSACTION) {
       const { amount, delegate, fee, storageLimit, gasLimit, code, storage, codeFormat, offset, optimizeFee } = transaction.data
-      const deployContractTxn = await helper.deployContract(connectionUrl, signer, keyStore, amount, delegate, fee, storageLimit, gasLimit, code, storage, codeFormat, offset, optimizeFee)
+      const deployContractTxn = await helper.deployContract(
+        connectionUrl,
+        signer,
+        keyStore,
+        amount,
+        delegate,
+        fee,
+        storageLimit,
+        gasLimit,
+        code,
+        storage,
+        codeFormat !== undefined ? codeFormat : DEFAULT_CONTRACT_TXN_CODE_FORMAT,
+        offset !== undefined ? offset : DEFAULT_TXN_OFFSET,
+        optimizeFee !== undefined ? optimizeFee : DEFAULT_TXN_OPTIMIZATION)
 
       return { signedTransaction: deployContractTxn }
     }
     if (txnType === CONTRACT_TRANSACTION) {
-
-      const { contract, amount, fee, storageLimit, gasLimit, entrypoint, parameters, parameterFormat, offset, optimizeFee } = transaction.data
-      const invokeContractTxn = await helper.invokeContract(connectionUrl, signer, keyStore, contract, amount, fee, storageLimit, gasLimit, entrypoint, parameters, parameterFormat, offset, optimizeFee)
+      const { contractAddress, amount, fee, storageLimit, gasLimit, entrypoint, parameters, parameterFormat, offset, optimizeFee } = transaction.data
+      const invokeContractTxn = await helper.invokeContract(
+        connectionUrl,
+        signer,
+        keyStore,
+        contractAddress,
+        amount,
+        fee,
+        storageLimit,
+        gasLimit,
+        entrypoint,
+        parameters,
+        parameterFormat !== undefined ? parameterFormat : DEFAULT_CONTRACT_TXN_PARAM_FORMAT,
+        offset !== undefined ? offset : DEFAULT_TXN_OFFSET,
+        optimizeFee !== undefined ? optimizeFee : DEFAULT_TXN_OPTIMIZATION)
 
       return { signedTransaction: invokeContractTxn }
     }

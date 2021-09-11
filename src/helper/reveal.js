@@ -1,4 +1,4 @@
-const {TezosConstants, TezosNodeReader} = require('conseiljs')
+const { TezosConstants, TezosNodeReader } = require('conseiljs')
 const signTransaction = require('./utils/signTransaction')
 
 async function revealOperation(server, signer, keyStore, fee = TezosConstants.DefaultKeyRevealFee, offset = TezosConstants.HeadBranchOffset) {
