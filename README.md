@@ -173,3 +173,29 @@ type: string
 ```
 
 **returns:** `{transactionDetails : string} // transaction hash`
+
+
+## Keywords
+
+### delegate
+Account ID to delegate to
+
+### fee
+Fee to be paid for the operation
+
+### storageLimit
+Storage fee. Fee to be paid for storing the data.
+
+### gasLimit
+Gas limit for transaction
+
+### storage
+Initial storage value
+### parameters 
+Contract arguments
+
+### parameterFormat
+Contract argument format
+    
+### offset
+Age of the block to use as branch, set to 0 for head, default is 54 to force operation expiration with 10 blocks.
