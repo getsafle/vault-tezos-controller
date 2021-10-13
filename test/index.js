@@ -162,6 +162,23 @@ describe('Initialize wallet ', () => {
         console.log("Signed message 3: ", signedMessage3)
     })
 
+    it("Get fees", async () => {
+        const { transactionFees: revealTransactionFees } = await tezWallet.getFee(REVEAL_ACCOUNT);
+        console.log("revealTransactionFees ", revealTransactionFees)
+
+        const { transactionFees: delegateTransactionFees } = await tezWallet.getFee(DELEGATE);
+        console.log("delegateTransactionFees ", delegateTransactionFees)
+
+        const { transactionFees: nativeTransferTransactionFees } = await tezWallet.getFee(NATIVE_TRANSFER);
+        console.log("nativeTransferTransactionFees ", nativeTransferTransactionFees)
+
+        const { transactionFees: deployContractTransactionFees } = await tezWallet.getFee(DEPLOY_CONTRACT_TRANSACTION);
+        console.log("deployContractTransactionFees ", deployContractTransactionFees)
+
+        const { transactionFees: callContractTransactionFees } = await tezWallet.getFee(CONTRACT_TRANSACTION);
+        console.log("callContractTransactionFees ", callContractTransactionFees)
+    })
+
     it("Should sign and send activate txn", async () => {
         try {
             const activateTxn = await tezWallet.signTransaction(ACTIVATE_TXN_PARAM.transaction, ACTIVATE_TXN_PARAM.connectionUrl)

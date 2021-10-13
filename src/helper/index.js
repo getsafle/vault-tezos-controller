@@ -7,6 +7,7 @@ const deployContract = require('./deployContract')
 const invokeContract = require('./invokeContract')
 const signOperation = require('./utils/signTransaction')
 const sendTransaction = require('./sendTransaction')
+const getFees = require('./getDefaultFees')
 
 module.exports = {
     generateKeystore: account,
@@ -17,5 +18,6 @@ module.exports = {
     delegate,
     transferTez,
     deployContract,
-    invokeContract
+    invokeContract,
+    getFees
 }

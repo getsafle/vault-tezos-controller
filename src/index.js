@@ -131,6 +131,11 @@ class XTZHdKeyring {
     return { address: this.wallet }
   }
 
+  async getFee(txnType) {
+    const transactionFees = await helper.getFees(txnType)
+    return { transactionFees }
+  }
+
   async sendTransaction(rawTransaction, connectionUrl) {
     const transactionDetails = await helper.sendTransaction(connectionUrl, rawTransaction)
     return { transactionDetails: transactionDetails }

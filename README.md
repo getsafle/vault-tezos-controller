@@ -74,7 +74,7 @@ TransactionObj: {
     data: {
         delegate, // delegate address (optional)
     },
-    txnType: TOKEN_TRANSFER // type constant
+    txnType: DELEGATE // type constant
 }
 ```
 
@@ -174,7 +174,19 @@ type: string
 
 **returns:** `{transactionDetails : string} // transaction hash`
 
+#### getFee(txnType: _string_)
 
+This function is used to get the transaction fees. <br />
+
+**parameters:** - <br />
+
+```
+name: txnType
+type: string
+value: DELEGATE | REVEAL_ACCOUNT | NATIVE_TRANSFER | DEPLOY_CONTRACT_TRANSACTION | CONTRACT_TRANSACTION
+```
+
+**returns:** `{transactionFees: integer} // transaction fees`
 ## Keywords
 
 ### delegate
