@@ -148,6 +148,7 @@ describe('Initialize wallet ', () => {
     it("Should fetch account details ", async () => {
         assert(tezWallet.address !== null)
         const account = await tezWallet.getAccounts()
+        console.log("account", account)
         assert(tezWallet.address !== null)
     })
 

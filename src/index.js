@@ -128,7 +128,7 @@ class XTZHdKeyring {
   }
 
   async getAccounts() {
-    return { address: this.wallet }
+    return { address: this.address }
   }
 
   async getFee(txnType) {
