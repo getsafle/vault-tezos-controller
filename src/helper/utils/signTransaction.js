@@ -40,7 +40,6 @@ async function signOperation(server, operations, signer, offset = TezosConstants
     const signedOpGroup = Buffer.concat([Buffer.from(forgedOperationGroup, 'hex'), opSignature]);
     const base58signature = TezosMessageUtils.readSignatureWithHint(opSignature, signer.getSignerCurve());
     const opPair = { bytes: signedOpGroup, signature: base58signature };
-    // const appliedOp = await preapplyOperation(server, blockHash, blockHead.protocol, operations, opPair);
     const appliedOp = await TezosNodeWriter.preapplyOperation(server, blockHash, blockHead.protocol, operations, opPair);
 
     return { results: appliedOp[0], signedOperations: opPair }; 

@@ -207,8 +207,8 @@ describe('Initialize wallet ', () => {
     it("Should sign and send delegate txn with no delegate address", async () => {
         const delegate = await tezWallet.signTransaction(DELEGATE_TXN_PARAM_NO_DELEGATE.transaction, DELEGATE_TXN_PARAM_NO_DELEGATE.connectionUrl)
         console.log("delegate ", delegate)
-        const transactionResult = await tezWallet.sendTransaction(delegate.signedTransaction.signedOperations, DELEGATE_TXN_PARAM_NO_DELEGATE.connectionUrl)
-        console.log("Delegate transactionResult ", transactionResult)
+        // const transactionResult = await tezWallet.sendTransaction(delegate.signedTransaction.signedOperations, DELEGATE_TXN_PARAM_NO_DELEGATE.connectionUrl)
+        // console.log("Delegate transactionResult ", transactionResult)
     })
 
     delay(10000)
@@ -216,8 +216,8 @@ describe('Initialize wallet ', () => {
     it("Should sign and send delegate txn with delegate address", async () => {
         const delegate = await tezWallet.signTransaction(DELEGATE_TXN_PARAM.transaction, DELEGATE_TXN_PARAM.connectionUrl)
         console.log("delegate ", delegate)
-        const transactionResult = await tezWallet.sendTransaction(delegate.signedTransaction.signedOperations, DELEGATE_TXN_PARAM.connectionUrl)
-        console.log("Delegate address transactionResult ", transactionResult)
+        // const transactionResult = await tezWallet.sendTransaction(delegate.signedTransaction.signedOperations, DELEGATE_TXN_PARAM.connectionUrl)
+        // console.log("Delegate address transactionResult ", transactionResult)
     })
 
     delay(10000)
@@ -225,8 +225,8 @@ describe('Initialize wallet ', () => {
     it("Should sign and send TEZ", async () => {
         const transferTez = await tezWallet.signTransaction(TEZ_TRANSFER_TXN_PARAM.transaction, TEZ_TRANSFER_TXN_PARAM.connectionUrl)
         console.log("transferTez ", transferTez)
-        const transactionResult = await tezWallet.sendTransaction(transferTez.signedTransaction.signedOperations, TEZ_TRANSFER_TXN_PARAM.connectionUrl)
-        console.log("Send tez transactionResult ", transactionResult)
+        // const transactionResult = await tezWallet.sendTransaction(transferTez.signedTransaction.signedOperations, TEZ_TRANSFER_TXN_PARAM.connectionUrl)
+        // console.log("Send tez transactionResult ", transactionResult)
     })
 
     delay(10000)
@@ -234,8 +234,8 @@ describe('Initialize wallet ', () => {
     it("Should sign and send deploy contract transaction", async () => {
         const deployContractTxn = await tezWallet.signTransaction(DEPLOY_CONTRACT_TXN_PARAM.transaction, DEPLOY_CONTRACT_TXN_PARAM.connectionUrl)
         console.log("deployContractTxn ", deployContractTxn)
-        const transactionResult = await tezWallet.sendTransaction(deployContractTxn.signedTransaction.signedOperations, DEPLOY_CONTRACT_TXN_PARAM.connectionUrl)
-        console.log("deploy contract transactionResult ", transactionResult)
+        // const transactionResult = await tezWallet.sendTransaction(deployContractTxn.signedTransaction.signedOperations, DEPLOY_CONTRACT_TXN_PARAM.connectionUrl)
+        // console.log("deploy contract transactionResult ", transactionResult)
     })
 
     delay(10000)
@@ -243,8 +243,8 @@ describe('Initialize wallet ', () => {
     it("Should sign and send invoke contract transaction", async () => {
         const invokeContractTxn = await tezWallet.signTransaction(INVOKE_CONTRACT_TXN_PARAM.transaction, INVOKE_CONTRACT_TXN_PARAM.connectionUrl)
         console.log("invokeContractTxn ", invokeContractTxn)
-        const transactionResult = await tezWallet.sendTransaction(invokeContractTxn.signedTransaction.signedOperations, INVOKE_CONTRACT_TXN_PARAM.connectionUrl)
-        console.log("Invoke contract transactionResult ", transactionResult)
+        // const transactionResult = await tezWallet.sendTransaction(invokeContractTxn.signedTransaction.signedOperations, INVOKE_CONTRACT_TXN_PARAM.connectionUrl)
+        // console.log("Invoke contract transactionResult ", transactionResult)
     })
 
 })
