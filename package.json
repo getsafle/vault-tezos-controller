@@ -1,5 +1,5 @@
 {
-  "name": "@getsafle/tezos-wallet-controller",
+  "name": "@getsafle/vault-tezos-controller",
   "version": "1.0.0",
   "description": "",
   "engines": {
@@ -26,14 +26,16 @@
   },
   "homepage": "https://github.com/getsafle/tezos-wallet-controller#readme",
   "dependencies": {
-    "bip39": "^2.2.0",
+    "base58-js": "^1.0.0",
+    "bip39": "^2.6.0",
     "conseiljs": "^5.0.8-3",
     "conseiljs-softsigner": "^5.0.4-1",
     "crypto-js": "^4.0.0",
     "ed25519-hd-key": "^1.2.0",
     "hdkey": "^2.0.1",
     "loglevel": "^1.7.1",
-    "node-fetch": "^2.6.2"
+    "node-fetch": "^2.6.2",
+    "obs-store": "^4.0.3"
   },
   "devDependencies": {
     "@metamask/eslint-config": "^4.0.0",

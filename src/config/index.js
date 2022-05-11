@@ -21,5 +21,32 @@ module.exports = {
         DEFAULT_CONTRACT_TXN_PARAM_FORMAT: TezosParameterFormat.Michelson,
         DEFAULT_TXN_OFFSET: TezosConstants.HeadBranchOffset,
         DEFAULT_TXN_OPTIMIZATION: false,
+    },
+    tezos_connection: {
+        TEZOS_TESTNET_HANGZHOU: {
+            NETWORK: "TEZOS_TESTNET_HANGZHOU",
+            URL: "https://tezos-hangzhou.cryptonomic-infra.tech:443",
+        },
+
+        TEZOS_TESTNET_GRANADANET: {
+            NETWORK: "TEZOS_TESTNET_GRANADANET",
+            URL: "https://tezos-granada.cryptonomic-infra.tech:443",
+        },
+        CONSEIL_TESTNET_HANGZHOU: {
+            NETWORK: "CONSEIL_TESTNET_HANGZHOU",
+            URL: "https://conseil-hangzhou.cryptonomic-infra.tech:443"
+        },
+        CONSEIL_TESTNET_GRANADANET: {
+            NETWORK: "CONSEIL_TESTNET_GRANADANET",
+            URL: "https://conseil-granada.cryptonomic-infra.tech:443"
+        },
+        TEZOS_MAINNET: {
+            NETWORK: "TEZOS_MAINNET",
+            URL: "https://tezos-prod.cryptonomic-infra.tech:443"
+        },
+        CONSEIL_MAINNET: {
+            NETWORK: "CONSEIL_MAINNET",
+            URL: "https://conseil-prod.cryptonomic-infra.tech:443"
+        }
     }
 }

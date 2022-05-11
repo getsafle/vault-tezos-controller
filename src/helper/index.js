@@ -1,4 +1,4 @@
-const account = require('./account')
+const { importAccount, manageSeedandGetAccountDetails } = require('./account')
 const revealAccount = require('./reveal')
 const activateAccount = require('./activate')
 const delegate = require('./delegate')
@@ -8,9 +8,13 @@ const invokeContract = require('./invokeContract')
 const signOperation = require('./utils/signTransaction')
 const sendTransaction = require('./sendTransaction')
 const getFees = require('./getDefaultFees')
+const getNetwork = require('./utils/getNetwork')
+const getBalance = require("./getBalance")
+const getHDPath = require("./utils/getHdPath")
 
 module.exports = {
-    generateKeystore: account,
+    generateKeystore: manageSeedandGetAccountDetails,
+    importAccount,
     revealAccount,
     activateAccount,
     signTransaction: signOperation,
@@ -19,5 +23,8 @@ module.exports = {
     transferTez,
     deployContract,
     invokeContract,
-    getFees
+    getFees,
+    getNetwork,
+    getBalance,
+    getHDPath
 }

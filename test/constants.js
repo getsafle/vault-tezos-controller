@@ -1,16 +1,45 @@
 module.exports = {
-    HD_WALLET_12_MNEMONIC: 'affair entry detect broom axis crawl found valve bamboo taste broken hundred',
+    HD_WALLET_12_MNEMONIC: 'session couch almost stadium firm embark lawn panic session planet error swing endless clip grief',
+    // 'affair entry detect broom axis crawl found valve bamboo taste broken hundred',
     HD_WALLET_12_MNEMONIC_NEW: "real art call uncle tuition curve soul fiction riot evolve jump fetch jungle fine sunset",
 
     HD_WALLET_24_MNEMONIC: 'begin pyramid grit rigid mountain stamp legal item result peace wealth supply satoshi elegant roof identify furnace march west chicken pen gorilla spot excuse',
 
+    // TEZOS_NETWORK: {
+    //     TEZOS_TESTNET_FLORENCENET: "https://tezos-florence.cryptonomic-infra.tech:443",
+    //     TEZOS_TESTNET_GRANADANET: "https://tezos-granada.cryptonomic-infra.tech:443",
+    //     CONSEIL_TESTNET_FLORENCENET: "https://conseil-florence.cryptonomic-infra.tech:443",
+    //     CONSEIL_TESTNET_GRANADANET: "https://conseil-granada.cryptonomic-infra.tech:443",
+    //     TEZOS_MAINNET: "https://tezos-prod.cryptonomic-infra.tech:443",
+    //     COONSEIL_MAINNET: "https://conseil-prod.cryptonomic-infra.tech:443"
+    // },
+
     TEZOS_NETWORK: {
-        TEZOS_TESTNET_FLORENCENET: "https://tezos-florence.cryptonomic-infra.tech:443",
-        TEZOS_TESTNET_GRANADANET: "https://tezos-granada.cryptonomic-infra.tech:443",
-        CONSEIL_TESTNET_FLORENCENET: "https://conseil-florence.cryptonomic-infra.tech:443",
-        CONSEIL_TESTNET_GRANADANET: "https://conseil-granada.cryptonomic-infra.tech:443",
-        TEZOS_MAINNET: "https://tezos-prod.cryptonomic-infra.tech:443",
-        COONSEIL_MAINNET: "https://conseil-prod.cryptonomic-infra.tech:443"
+        TEZOS_TESTNET_HANGZHOU: {
+            NETWORK: "TEZOS_TESTNET_HANGZHOU",
+            URL: "https://tezos-hangzhou.cryptonomic-infra.tech:443",
+        },
+
+        TEZOS_TESTNET_GRANADANET: {
+            NETWORK: "TEZOS_TESTNET_GRANADANET",
+            URL: "https://tezos-granada.cryptonomic-infra.tech:443",
+        },
+        CONSEIL_TESTNET_HANGZHOU: {
+            NETWORK: "CONSEIL_TESTNET_HANGZHOU",
+            URL: "https://conseil-hangzhou.cryptonomic-infra.tech:443"
+        },
+        CONSEIL_TESTNET_GRANADANET: {
+            NETWORK: "CONSEIL_TESTNET_GRANADANET",
+            URL: "https://conseil-granada.cryptonomic-infra.tech:443"
+        },
+        TEZOS_MAINNET: {
+            NETWORK: "TEZOS_MAINNET",
+            URL: "https://tezos-prod.cryptonomic-infra.tech:443"
+        },
+        CONSEIL_MAINNET: {
+            NETWORK: "CONSEIL_MAINNET",
+            URL: "https://conseil-prod.cryptonomic-infra.tech:443"
+        }
     },
 
     TRANSACTION_TYPE: {
