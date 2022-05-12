@@ -1,7 +1,9 @@
-const { tezos_connection: { TEZOS_TESTNET_HANGZHOU, TEZOS_TESTNET_GRANADANET, CONSEIL_TESTNET_HANGZHOU, CONSEIL_TESTNET_GRANADANET, TEZOS_MAINNET, CONSEIL_MAINNET } } = require("../../config/index")
+const { tezos_connection: { TEZOS_TESTNET_ITHACANET, TEZOS_TESTNET_HANGZHOU, TEZOS_TESTNET_GRANADANET, CONSEIL_TESTNET_HANGZHOU, CONSEIL_TESTNET_GRANADANET, TEZOS_MAINNET, CONSEIL_MAINNET } } = require("../../config/index")
 
 function getActiveNetwork(_network) {
     switch (_network) {
+        case TEZOS_TESTNET_ITHACANET.NETWORK:
+            return TEZOS_TESTNET_ITHACANET.URL;
         case TEZOS_TESTNET_HANGZHOU.NETWORK:
             return TEZOS_TESTNET_HANGZHOU.URL;
         case TEZOS_TESTNET_GRANADANET.NETWORK:
@@ -16,7 +18,6 @@ function getActiveNetwork(_network) {
             return TEZOS_MAINNET.URL;
     }
 
-    return _network === TESTNET.NETWORK ? TESTNET.URL : _network === DEVNET.NETWORK ? DEVNET.URL : MAINNET.URL
 }
 
 module.exports = getActiveNetwork

@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/getsafle/tezos-wallet-controller.git"
+    "url": "git+https://github.com/getsafle/vault-tezos-controller.git"
   },
   "keywords": [
     "tezos",
@@ -22,9 +22,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/getsafle/tezos-wallet-controller/issues"
+    "url": "https://github.com/getsafle/vault-tezos-controller/issues"
   },
-  "homepage": "https://github.com/getsafle/tezos-wallet-controller#readme",
+  "homepage": "https://github.com/getsafle/vault-tezos-controller#readme",
   "dependencies": {
     "base58-js": "^1.0.0",
     "bip39": "^2.6.0",

@@ -3,6 +3,7 @@ const { KeyringController: Tezos, getBalance } = require('../src/index')
 const {
     HD_WALLET_12_MNEMONIC,
     TEZOS_NETWORK: {
+        TEZOS_TESTNET_ITHACANET,
         TEZOS_TESTNET_HANGZHOU,
         TEZOS_TESTNET_GRANADANET,
         CONSEIL_TESTNET_HANGZHOU,
@@ -52,21 +53,21 @@ const ACTIVATE_TXN_PARAM = {
     transaction: {
         data: {}, txnType: ACTIVATE_ACCOUNT
     },
-    connectionUrl: TEZOS_TESTNET_HANGZHOU
+    connectionUrl: TEZOS_TESTNET_ITHACANET
 }
 
 const REVEAL_TXN_PARAM = {
     transaction: {
         data: {}, txnType: REVEAL_ACCOUNT
     },
-    connectionUrl: TEZOS_TESTNET_HANGZHOU
+    connectionUrl: TEZOS_TESTNET_ITHACANET
 }
 
 const DELEGATE_TXN_PARAM_NO_DELEGATE = {
     transaction: {
         data: {}, txnType: DELEGATE
     },
-    connectionUrl: TEZOS_TESTNET_HANGZHOU
+    connectionUrl: TEZOS_TESTNET_ITHACANET
 }
 
 const DELEGATE_TXN_PARAM = {
@@ -75,7 +76,7 @@ const DELEGATE_TXN_PARAM = {
             delegate: DELEGATE_ADD
         }, txnType: DELEGATE
     },
-    connectionUrl: TEZOS_TESTNET_HANGZHOU
+    connectionUrl: TEZOS_TESTNET_ITHACANET
 }
 
 const TEZ_TRANSFER_TXN_PARAM = {
@@ -85,7 +86,7 @@ const TEZ_TRANSFER_TXN_PARAM = {
             amount: TEZ_AMOUNT
         }, txnType: NATIVE_TRANSFER
     },
-    connectionUrl: TEZOS_TESTNET_HANGZHOU
+    connectionUrl: TEZOS_TESTNET_ITHACANET
 }
 
 const DEPLOY_CONTRACT_TXN_PARAM = {
@@ -100,7 +101,7 @@ const DEPLOY_CONTRACT_TXN_PARAM = {
             storage: STORAGE,
         }, txnType: DEPLOY_CONTRACT_TRANSACTION
     },
-    connectionUrl: TEZOS_TESTNET_HANGZHOU
+    connectionUrl: TEZOS_TESTNET_ITHACANET
 }
 
 const INVOKE_CONTRACT_TXN_PARAM = {
@@ -115,7 +116,7 @@ const INVOKE_CONTRACT_TXN_PARAM = {
             parameters: INVOKE_PARAMETERS,
         }, txnType: CONTRACT_TRANSACTION
     },
-    connectionUrl: TEZOS_TESTNET_HANGZHOU
+    connectionUrl: TEZOS_TESTNET_ITHACANET
 }
 
 function delay(interval) {
@@ -127,7 +128,7 @@ function delay(interval) {
 
 const opts = {
     mnemonic: HD_WALLET_12_MNEMONIC,
-    network: TEZOS_TESTNET_HANGZHOU.NETWORK
+    network: TEZOS_TESTNET_ITHACANET.NETWORK
 }
 
 describe('Initialize wallet ', () => {
@@ -157,6 +158,10 @@ describe('Initialize wallet ', () => {
         const account = await tezWallet.importWallet(privateKey)
         console.log("account, ", account)
         assert(account === acc[0], "Should be the zeroth account")
+
+        const account_other = await tezWallet.importWallet('edskS29nLfFbioKTXNBvKn8AeQidrT7fC9kjst9APXrnoXCntBh3e3sKiHNyMzdsLzkFU7ZuocYjwyzE7Lrs1nuiJrsqS6SfcA')
+        console.log("account_other, ", account_other)
+        assert(account_other === 'tz1QvRwL7rrgtBxvoHMnA7Qra5xRjVZL3Yme', "Should be tz1QvRwL7rrgtBxvoHMnA7Qra5xRjVZL3Yme")
     })
 
     it("Should get balance of the address ", async () => {
@@ -165,7 +170,8 @@ describe('Initialize wallet ', () => {
         const balance = await getBalance(acc[0], opts.network)
         console.log("balance ", balance)
     })
-
+    // })
+    // /**
     it("Sign message", async () => {
         const acc = await tezWallet.getAccounts()
 
@@ -200,6 +206,7 @@ describe('Initialize wallet ', () => {
         try {
             const acc = await tezWallet.getAccounts()
             ACTIVATE_TXN_PARAM.transaction['from'] = acc[0]
+            // ACTIVATE_TXN_PARAM.transaction['from'] = 'tz1SMARcpWCydHsGgz4MRoK9NkbpBmmUAfNe'
 
             const activateTxn = await tezWallet.signTransaction(ACTIVATE_TXN_PARAM.transaction)
             console.log("activateTxn ", activateTxn)
@@ -211,78 +218,78 @@ describe('Initialize wallet ', () => {
         }
     })
 
-    // it("Should sign and send reveal txn", async () => {
-    //     try {
-    //         const acc = await tezWallet.getAccounts()
-    //         REVEAL_TXN_PARAM.transaction['from'] = acc[0]
+    it("Should sign and send reveal txn", async () => {
+        try {
+            const acc = await tezWallet.getAccounts()
+            REVEAL_TXN_PARAM.transaction['from'] = acc[0]
 
-    //         const revealTxn = await tezWallet.signTransaction(REVEAL_TXN_PARAM.transaction)
-    //         console.log("revealTxn ", revealTxn)
-    //         const transactionResult = await tezWallet.sendTransaction(revealTxn.signedTransaction.signedOperations)
-    //         console.log("Reveal transactionResult ", transactionResult)
-    //     } catch (err) {
-    //         console.log("Reveal will only pass on first attempt and account should have some funds. Probably will always fail due to 1 balance")
-    //         console.log("Error : ", err)
-    //     }
-    // })
+            const revealTxn = await tezWallet.signTransaction(REVEAL_TXN_PARAM.transaction)
+            console.log("revealTxn ", revealTxn)
+            const transactionResult = await tezWallet.sendTransaction(revealTxn.signedTransaction.signedOperations)
+            console.log("Reveal transactionResult ", transactionResult)
+        } catch (err) {
+            console.log("Reveal will only pass on first attempt and account should have some funds. Probably will always fail due to 1 balance")
+            console.log("Error : ", err)
+        }
+    })
 
-    // it("Should sign and send delegate txn with no delegate address", async () => {
-    //     const acc = await tezWallet.getAccounts()
-    //     DELEGATE_TXN_PARAM_NO_DELEGATE.transaction['from'] = acc[0]
+    it("Should sign and send delegate txn with no delegate address", async () => {
+        const acc = await tezWallet.getAccounts()
+        DELEGATE_TXN_PARAM_NO_DELEGATE.transaction['from'] = acc[0]
 
-    //     const delegate = await tezWallet.signTransaction(DELEGATE_TXN_PARAM_NO_DELEGATE.transaction)
-    //     console.log("delegate ", delegate)
-    //     // const transactionResult = await tezWallet.sendTransaction(delegate.signedTransaction.signedOperations)
-    //     // console.log("Delegate transactionResult ", transactionResult)
-    // })
+        const delegate = await tezWallet.signTransaction(DELEGATE_TXN_PARAM_NO_DELEGATE.transaction)
+        console.log("delegate ", delegate)
+        // const transactionResult = await tezWallet.sendTransaction(delegate.signedTransaction.signedOperations)
+        // console.log("Delegate transactionResult ", transactionResult)
+    })
 
-    // delay(10000)
+    delay(10000)
 
-    // it("Should sign and send delegate txn with delegate address", async () => {
-    //     const acc = await tezWallet.getAccounts()
-    //     DELEGATE_TXN_PARAM.transaction['from'] = acc[0]
+    it("Should sign and send delegate txn with delegate address", async () => {
+        const acc = await tezWallet.getAccounts()
+        DELEGATE_TXN_PARAM.transaction['from'] = acc[0]
 
-    //     const delegate = await tezWallet.signTransaction(DELEGATE_TXN_PARAM.transaction)
-    //     console.log("delegate ", delegate)
-    //     // const transactionResult = await tezWallet.sendTransaction(delegate.signedTransaction.signedOperations)
-    //     // console.log("Delegate address transactionResult ", transactionResult)
-    // })
+        const delegate = await tezWallet.signTransaction(DELEGATE_TXN_PARAM.transaction)
+        console.log("delegate ", delegate)
+        // const transactionResult = await tezWallet.sendTransaction(delegate.signedTransaction.signedOperations)
+        // console.log("Delegate address transactionResult ", transactionResult)
+    })
 
-    // delay(10000)
+    delay(10000)
 
-    // it("Should sign and send TEZ", async () => {
-    //     const acc = await tezWallet.getAccounts()
-    //     TEZ_TRANSFER_TXN_PARAM.transaction['from'] = acc[0]
+    it("Should sign and send TEZ", async () => {
+        const acc = await tezWallet.getAccounts()
+        TEZ_TRANSFER_TXN_PARAM.transaction['from'] = acc[0]
 
-    //     const transferTez = await tezWallet.signTransaction(TEZ_TRANSFER_TXN_PARAM.transaction)
-    //     console.log("transferTez ", transferTez)
-    //     // const transactionResult = await tezWallet.sendTransaction(transferTez.signedTransaction.signedOperations)
-    //     // console.log("Send tez transactionResult ", transactionResult)
-    // })
+        const transferTez = await tezWallet.signTransaction(TEZ_TRANSFER_TXN_PARAM.transaction)
+        console.log("transferTez ", transferTez)
+        // const transactionResult = await tezWallet.sendTransaction(transferTez.signedTransaction.signedOperations)
+        // console.log("Send tez transactionResult ", transactionResult)
+    })
 
-    // delay(10000)
+    delay(10000)
 
-    // it("Should sign and send deploy contract transaction", async () => {
-    //     const acc = await tezWallet.getAccounts()
-    //     DEPLOY_CONTRACT_TXN_PARAM.transaction['from'] = acc[0]
+    it("Should sign and send deploy contract transaction", async () => {
+        const acc = await tezWallet.getAccounts()
+        DEPLOY_CONTRACT_TXN_PARAM.transaction['from'] = acc[0]
 
-    //     const deployContractTxn = await tezWallet.signTransaction(DEPLOY_CONTRACT_TXN_PARAM.transaction)
-    //     console.log("deployContractTxn ", deployContractTxn)
-    //     // const transactionResult = await tezWallet.sendTransaction(deployContractTxn.signedTransaction.signedOperations)
-    //     // console.log("deploy contract transactionResult ", transactionResult)
-    // })
+        const deployContractTxn = await tezWallet.signTransaction(DEPLOY_CONTRACT_TXN_PARAM.transaction)
+        console.log("deployContractTxn ", deployContractTxn)
+        // const transactionResult = await tezWallet.sendTransaction(deployContractTxn.signedTransaction.signedOperations)
+        // console.log("deploy contract transactionResult ", transactionResult)
+    })
 
-    // delay(10000)
+    delay(10000)
 
-    // it("Should sign and send invoke contract transaction", async () => {
-    //     const acc = await tezWallet.getAccounts()
-    //     INVOKE_CONTRACT_TXN_PARAM.transaction['from'] = acc[0]
+    it("Should sign and send invoke contract transaction", async () => {
+        const acc = await tezWallet.getAccounts()
+        INVOKE_CONTRACT_TXN_PARAM.transaction['from'] = acc[0]
 
-    //     const invokeContractTxn = await tezWallet.signTransaction(INVOKE_CONTRACT_TXN_PARAM.transaction)
-    //     console.log("invokeContractTxn ", invokeContractTxn)
-    //     // const transactionResult = await tezWallet.sendTransaction(invokeContractTxn.signedTransaction.signedOperations)
-    //     // console.log("Invoke contract transactionResult ", transactionResult)
-    // })
+        const invokeContractTxn = await tezWallet.signTransaction(INVOKE_CONTRACT_TXN_PARAM.transaction)
+        console.log("invokeContractTxn ", invokeContractTxn)
+        // const transactionResult = await tezWallet.sendTransaction(invokeContractTxn.signedTransaction.signedOperations)
+        // console.log("Invoke contract transactionResult ", transactionResult)
+    })
 
 })
     // */

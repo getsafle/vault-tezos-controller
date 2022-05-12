@@ -1,55 +1,71 @@
-# tezos-wallet-controller
+# vault-tezos-controller
 
-This repository contains `XTZHdKeyring` class to create **Tezos wallet** from **Safle Vault**.
+## Install
 
-## Usecase
+`npm install --save @getsafle/vault-tezos-controller`
 
-We will be using `XTZHdKeyring` class to initialize the wallet and then utilize the provided functions to perform the required tasks. <br />
-The class initialization is done in the following way.
+## Initialize the Tezos Controller class
 
 ```
-const tezWallet = new XTZHdKeyring(`mnemonic`)
+const { KeyringController, getBalance } = require('@getsafle/vault-tezos-controller');
+
+const tezosController = new KeyringController({
+    // 12 words mnemonic to create wallet
+    mnemonic: string,
+    // network - type of network [TEZOS_TESTNET_ITHACANET | TEZOS_TESTNET_HANGZHOU | TEZOS_TESTNET_GRANADANET | CONSEIL_TESTNET_HANGZHOU | CONSEIL_TESTNET_GRANADANET | TEZOS_MAINNET | CONSEIL_MAINNET]
+    // default is TEZOS_MAINNET even if no network is passed
+    network: string (TEZOS_TESTNET_ITHACANET | TEZOS_TESTNET_HANGZHOU | TEZOS_TESTNET_GRANADANET | CONSEIL_TESTNET_HANGZHOU | CONSEIL_TESTNET_GRANADANET | TEZOS_MAINNET | CONSEIL_MAINNET)
+});
 ```
 
-`mnemonic` is the BIP-39 key phrase to generate the wallet.
+## Methods
 
-Once we initialize the class, we can utilize the provided functions.
+### Generate Keyring with 1 account or add new account
 
-The wallet have the following functions:
+```
+const keyringState = await tezosController.addAccount();
+```
 
-#### generateWallet()
+### Export the private key of an address present in the keyring
 
-This function is used to generate the Solana wallet and set the 0th address as the default address. <br />
-parameters: - <br />
-returns: `{address : string} // wallet address`
+```
+const privateKey = await tezosController.exportPrivateKey(address);
+```
 
-#### exportPrivateKey()
+### Get all accounts in the keyring
 
-This function is used to export the private key for the generated address. <br />
-**parameters:** - <br />
-**returns:** `{privateKey : string} // address private key`
+```
+const privateKey = await tezosController.getAccounts();
+```
 
-#### signTransaction(transaction: _TransactionObj_ , connectionUrl: _string_ )
+### Sign a transaction
 
-This function is used to sign a transaction off-chain and then send it to the network.<br /> Transactions are of 4 types:
+```
+const signedTx = await tezosController.signTransaction(tezosTx: TransactionObj);
+
+```
+
+###### TransactionObj
 
 1. Activate account (only Fundraiser accounts):<br />
-Any Fundraiser wallet needs to be activated before it can accept funds.<br />We will create account from mnemonic so this function is not required.<br />The transaction object is of the following type:
+   Any Fundraiser wallet needs to be activated before it can accept funds.<br />We will create account from mnemonic so this function is not required.<br />The transaction object is of the following type:
 
 ```
 TransactionObj: {
     data: {},
-    txnType: ACTIVATE_ACCOUNT // type constant
+    txnType: ACTIVATE_ACCOUNT, // type constant
+    from //sender address
 }
 ```
 
 2. Reveal account:<br />
-Any tezos wallet needs to be revealed, i.e. published on the network to perform transactions.<br />The account will need to pay fee for the transaction and hence there should be some value in it.<br />The transaction object is of the following type:
+   Any tezos wallet needs to be revealed, i.e. published on the network to perform transactions.<br />The account will need to pay fee for the transaction and hence there should be some value in it.<br />The transaction object is of the following type:
 
 ```
 TransactionObj: {
     data: {},
-    txnType: REVEAL_ACCOUNT // type constant
+    txnType: REVEAL_ACCOUNT, // type constant
+    from //sender address
 }
 ```
 
@@ -62,7 +78,8 @@ TransactionObj: {
         to, // destination address
         amount, // amount in µtz (micro-tez)
     },
-    txnType: NATIVE_TRANSFER // type constant
+    txnType: NATIVE_TRANSFER, // type constant
+    from //sender address
 }
 ```
 
@@ -75,6 +92,7 @@ TransactionObj: {
         delegate, // delegate address (optional)
     },
     txnType: DELEGATE // type constant
+    from //sender address
 }
 ```
 
@@ -92,7 +110,8 @@ TransactionObj: {
         code, // contract michelson code
         storage // storage variables
     },
-    txnType: DEPLOY_CONTRACT_TRANSACTION // type constant
+    txnType: DEPLOY_CONTRACT_TRANSACTION, // type constant
+    from //sender address
 }
 ```
 
@@ -110,7 +129,8 @@ TransactionObj: {
         entrypoint, // function to call
         parameters, // function params / storage params value
     },
-   txnType: CONTRACT_TRANSACTION // type constant
+   txnType: CONTRACT_TRANSACTION, // type constant
+   from //sender address
 }
 ```
 
@@ -119,9 +139,6 @@ TransactionObj: {
 ```
 name: transaction,
 type: TransactionObj, // refer to the above 6 trancationObj types.
-
-name: connectionUrl, // Tezos network URL
-type: string
 ```
 
 ```
@@ -140,74 +157,20 @@ signedTransactionObject: {
 
 **returns:** `{signedTransaction: signedTransactionObject} signed raw transaction`
 
-#### signMessage(message: _string_ )
-
-This function is used to sign a message. <br />
-**parameters:**
+### Sign a message
 
 ```
-name: message
-type: string
+const signedMsg = await tezosController.signMessage(msgString, address);
 ```
 
-**returns:** `{signedMessage: string} // signed message hex string`
-
-
-#### getAccounts()
-
-This function is used to get the wallet address. <br />
-**parameters:** - <br />
-**returns:** `{address : string}  // wallet address`
-
-#### sendTransaction(rawTransaction: _Buffer_ | _UInt8Array_ , connectionUrl: _string_)
-
-This function is used send the signed transaction onto the chain. <br />
-**parameters:**
+### Get fees
 
 ```
-name: rawTransaction, // {signedTransactionObject.signedOperations} signed raw transaction (got from signedTransaction())
-type: Buffer | UInt8Array
-
-name: connectionUrl, // SOLANA network URL
-type: string
+const fees = await tezosController.getFee(address);
 ```
 
-**returns:** `{transactionDetails : string} // transaction hash`
-
-#### getFee(txnType: _string_)
-
-This function is used to get the transaction fees. <br />
-
-**parameters:** - <br />
+### Get balance
 
 ```
-name: txnType
-type: string
-value: DELEGATE | REVEAL_ACCOUNT | NATIVE_TRANSFER | DEPLOY_CONTRACT_TRANSACTION | CONTRACT_TRANSACTION
+const balance = await getBalance(address, network); // if network !== TESTNET || then it will fetch mainnet balance
 ```
-
-**returns:** `{transactionFees: integer} // transaction fees`
-## Keywords
-
-### delegate
-Account ID to delegate to
-
-### fee
-Fee to be paid for the operation
-
-### storageLimit
-Storage fee. Fee to be paid for storing the data.
-
-### gasLimit
-Gas limit for transaction
-
-### storage
-Initial storage value
-### parameters 
-Contract arguments
-
-### parameterFormat
-Contract argument format
-    
-### offset
-Age of the block to use as branch, set to 0 for head, default is 54 to force operation expiration with 10 blocks.

@@ -15,11 +15,14 @@ module.exports = {
     // },
 
     TEZOS_NETWORK: {
+        TEZOS_TESTNET_ITHACANET: {
+            NETWORK: "TEZOS_TESTNET_ITHACANET",
+            URL: "	https://ithacanet.ecadinfra.com"
+        },
         TEZOS_TESTNET_HANGZHOU: {
             NETWORK: "TEZOS_TESTNET_HANGZHOU",
             URL: "https://tezos-hangzhou.cryptonomic-infra.tech:443",
         },
-
         TEZOS_TESTNET_GRANADANET: {
             NETWORK: "TEZOS_TESTNET_GRANADANET",
             URL: "https://tezos-granada.cryptonomic-infra.tech:443",
@@ -54,7 +57,7 @@ module.exports = {
     ACTIVATE_TRANSACTION_PARAM: {},
     REVEAL_TRANSACTION_PARAM: {},
     DELEGATE_TRANSACTION_PARAM: {
-        DELEGATE_ADD: "tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3"
+        DELEGATE_ADD: "tz1VoSM93UoY5gjuvb1bHdwdJZzU4P5eEAs4"
     },
     NATIVE_TEZ_TRANSFER_TRANSACTION_PARAM: {
         TO_ADDRESS: "tz1e8UhukEtmsEWyEjxksShSaYzDahH7j7NP",
@@ -91,7 +94,7 @@ module.exports = {
     },
 
     INVOKE_CONTRACT_TRANSACTION_PARAM: {
-        INVOKE_CONTRACT_ADDRESS: 'KT1ET1LQCeHWY8bgFGRdU3GqVXd6cHdJwjbg',
+        INVOKE_CONTRACT_ADDRESS: 'KT1RXcEx754BaN4hkorh3DTEkejaf4LPa4Mp',
         INVOKE_AMOUNT: 10000,
         INVOKE_FEE: 100000,
         INVOKE_STORAGE_LIMIT: 1000,

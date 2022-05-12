@@ -211,15 +211,12 @@ class KeyringController {
 
 const getBalance = async (address, networkType) => {
   try {
-    // const network = helper.getNetwork(networkType)
-    // const balance = await helper.getBalance(address)
-    // const connection = new solanaWeb3.Connection(network, "confirmed")
-    // const accInfo = await connection.getAccountInfo(new solanaWeb3.PublicKey(address))
-    return { balance: 0 }
+    const network = helper.getNetwork(networkType)
+    const balance = await helper.getBalance(network, address)
+    return { balance: balance }
   } catch (err) {
     throw err
   }
 }
-
 
 module.exports = { KeyringController, getBalance }

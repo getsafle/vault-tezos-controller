@@ -23,6 +23,10 @@ module.exports = {
         DEFAULT_TXN_OPTIMIZATION: false,
     },
     tezos_connection: {
+        TEZOS_TESTNET_ITHACANET: {
+            NETWORK: "TEZOS_TESTNET_ITHACANET",
+            URL: "https://ithacanet.ecadinfra.com"
+        },
         TEZOS_TESTNET_HANGZHOU: {
             NETWORK: "TEZOS_TESTNET_HANGZHOU",
             URL: "https://tezos-hangzhou.cryptonomic-infra.tech:443",
