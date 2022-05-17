@@ -1,0 +1,48 @@
+{
+  "name": "@getsafle/vault-tezos-controller",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": ">= 10"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint --fix . --ext .js",
+    "test": "mocha --timeout 15000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getsafle/vault-tezos-controller.git"
+  },
+  "keywords": [
+    "tezos",
+    "keyring"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/getsafle/vault-tezos-controller/issues"
+  },
+  "homepage": "https://github.com/getsafle/vault-tezos-controller#readme",
+  "dependencies": {
+    "base58-js": "^1.0.0",
+    "bip39": "^2.6.0",
+    "conseiljs": "^5.0.8-3",
+    "conseiljs-softsigner": "^5.0.4-1",
+    "crypto-js": "^4.0.0",
+    "ed25519-hd-key": "^1.2.0",
+    "hdkey": "^2.0.1",
+    "loglevel": "^1.7.1",
+    "node-fetch": "^2.6.2",
+    "obs-store": "^4.0.3"
+  },
+  "devDependencies": {
+    "@metamask/eslint-config": "^4.0.0",
+    "eslint": "^7.7.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-mocha": "^8.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "mocha": "^8.1.3"
+  }
+}
