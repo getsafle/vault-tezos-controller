@@ -28,7 +28,7 @@
   "dependencies": {
     "base58-js": "^1.0.0",
     "bip39": "^2.6.0",
-    "conseiljs": "^5.0.8-3",
+    "conseiljs": "5.1.0",
     "conseiljs-softsigner": "^5.0.4-1",
     "crypto-js": "^4.0.0",
     "ed25519-hd-key": "^1.2.0",
