@@ -1,6 +1,7 @@
 const ObservableStore = require('obs-store')
 const { SoftSigner } = require('conseiljs-softsigner');
-const { registerFetch, registerLogger, TezosMessageUtils } = require('conseiljs')
+const { TezosMessageUtils } = require('conseiljs')
+const { registerFetch, registerLogger } = require('conseiljs/dist/index')
 const fetch = require('node-fetch');
 const log = require('loglevel');
 
@@ -14,6 +15,7 @@ const {
 const helper = require('./helper')
 
 const logger = log.getLogger('conseiljs');
+logger.setLevel('debug', false);
 registerLogger(logger);
 registerFetch(fetch);
 
