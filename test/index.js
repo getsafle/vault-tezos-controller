@@ -3,7 +3,7 @@ const { KeyringController: Tezos, getBalance } = require('../src/index')
 const {
     HD_WALLET_12_MNEMONIC,
     TEZOS_NETWORK: {
-        TEZOS_TESTNET_ITHACANET,
+        TEZOS_TESTNET_GHOSTNET,
         TEZOS_TESTNET_HANGZHOU,
         TEZOS_TESTNET_GRANADANET,
         CONSEIL_TESTNET_HANGZHOU,
@@ -53,21 +53,21 @@ const ACTIVATE_TXN_PARAM = {
     transaction: {
         data: {}, txnType: ACTIVATE_ACCOUNT
     },
-    connectionUrl: TEZOS_TESTNET_ITHACANET
+    connectionUrl: TEZOS_TESTNET_GHOSTNET
 }
 
 const REVEAL_TXN_PARAM = {
     transaction: {
         data: {}, txnType: REVEAL_ACCOUNT
     },
-    connectionUrl: TEZOS_TESTNET_ITHACANET
+    connectionUrl: TEZOS_TESTNET_GHOSTNET
 }
 
 const DELEGATE_TXN_PARAM_NO_DELEGATE = {
     transaction: {
         data: {}, txnType: DELEGATE
     },
-    connectionUrl: TEZOS_TESTNET_ITHACANET
+    connectionUrl: TEZOS_TESTNET_GHOSTNET
 }
 
 const DELEGATE_TXN_PARAM = {
@@ -76,7 +76,7 @@ const DELEGATE_TXN_PARAM = {
             delegate: DELEGATE_ADD
         }, txnType: DELEGATE
     },
-    connectionUrl: TEZOS_TESTNET_ITHACANET
+    connectionUrl: TEZOS_TESTNET_GHOSTNET
 }
 
 const TEZ_TRANSFER_TXN_PARAM = {
@@ -86,7 +86,7 @@ const TEZ_TRANSFER_TXN_PARAM = {
             amount: TEZ_AMOUNT
         }, txnType: NATIVE_TRANSFER
     },
-    connectionUrl: TEZOS_TESTNET_ITHACANET
+    connectionUrl: TEZOS_TESTNET_GHOSTNET
 }
 
 const DEPLOY_CONTRACT_TXN_PARAM = {
@@ -101,7 +101,7 @@ const DEPLOY_CONTRACT_TXN_PARAM = {
             storage: STORAGE,
         }, txnType: DEPLOY_CONTRACT_TRANSACTION
     },
-    connectionUrl: TEZOS_TESTNET_ITHACANET
+    connectionUrl: TEZOS_TESTNET_GHOSTNET
 }
 
 const INVOKE_CONTRACT_TXN_PARAM = {
@@ -116,7 +116,7 @@ const INVOKE_CONTRACT_TXN_PARAM = {
             parameters: INVOKE_PARAMETERS,
         }, txnType: CONTRACT_TRANSACTION
     },
-    connectionUrl: TEZOS_TESTNET_ITHACANET
+    connectionUrl: TEZOS_TESTNET_GHOSTNET
 }
 
 function delay(interval) {
@@ -128,7 +128,7 @@ function delay(interval) {
 
 const opts = {
     mnemonic: HD_WALLET_12_MNEMONIC,
-    network: TEZOS_TESTNET_ITHACANET.NETWORK
+    network: TEZOS_TESTNET_GHOSTNET.NETWORK
 }
 
 describe('Initialize wallet ', () => {
