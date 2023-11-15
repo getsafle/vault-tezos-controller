@@ -23,9 +23,9 @@ module.exports = {
         DEFAULT_TXN_OPTIMIZATION: false,
     },
     tezos_connection: {
-        TEZOS_TESTNET_ITHACANET: {
-            NETWORK: "TEZOS_TESTNET_ITHACANET",
-            URL: "https://ithacanet.ecadinfra.com"
+        TEZOS_TESTNET_GHOSTNET: {
+            NETWORK: "TEZOS_TESTNET_GHOSTNET",
+            URL: "https://ghostnet.ecadinfra.com/"
         },
         TEZOS_TESTNET_HANGZHOU: {
             NETWORK: "TEZOS_TESTNET_HANGZHOU",

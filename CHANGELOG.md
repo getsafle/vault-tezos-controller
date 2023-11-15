@@ -9,3 +9,9 @@
 ##### Updated conseilJS imports
 
 - Updated registerFetch and registerLogger imports from conseilJs library
+
+### 1.0.2 (2023-11-15)
+
+##### Updated testnet
+
+- Updated configuration since Ithacanet renamed to ghostnet, the testchain for the Ithaca protocol
